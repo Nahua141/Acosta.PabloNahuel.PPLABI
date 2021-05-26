@@ -86,7 +86,7 @@ int altaMascota(eMascota mascotas[], int tamM, eTipo tipos[], int tamT, eColor c
             mostrarTipos(tipos, tamT);
             printf("Ingrese ID del tipo de la mascota: ");
             scanf("%d", &idTipo);
-            while(idTipo < 1000 && idTipo > 1004)
+            while(validarIdTipos(idTipo, tipos, tamT) == 0)
             {
                 printf("Reingrese ID del tipo de la mascota: ");
                 scanf("%d", &idTipo);
@@ -97,7 +97,7 @@ int altaMascota(eMascota mascotas[], int tamM, eTipo tipos[], int tamT, eColor c
             printf("Ingrese ID del color de la mascota: ");
             scanf("%d", &idColor);
 
-            while(idColor < 5000 && idColor > 5004)
+            while(validarIdColor(idColor, colores, tamC)== 0)
             {
                 printf("Reingrese ID del color de la mascota: ");
                 scanf("%d", &idColor);
@@ -106,6 +106,11 @@ int altaMascota(eMascota mascotas[], int tamM, eTipo tipos[], int tamT, eColor c
 
             printf("Ingrese edad de la mascota: ");
             scanf("%d", &nuevaMascota.edad);
+            while(nuevaMascota.edad < 0)
+            {
+                printf("Reingrese edad de la mascota: ");
+                scanf("%d", &nuevaMascota.edad);
+            }
 
             nuevaMascota.id = *pId;
             nuevaMascota.isEmpty = 0;
@@ -249,39 +254,4 @@ int cargarDescripcionMascota(int id, eMascota mascotas[], int tamM, char desc[])
     }
     return todoOk;
 }
-int bajaMascota(eMascota mascotas[], int tamM, eTipo tipos[], int tamT, eColor colores[], int tamC)
-{
-    int todoOk = 0;
-    int id;
-    int indice;
-    char confirma;
-    system("cls");
-    printf("Baja de mascota\n");
-    mostrarMascotas(mascotas, tamM, tipos, tamT, colores, tamC);
-    printf("Ingrese id: ");
-    scanf("%d", &id);
 
-    indice = buscarMascota(mascotas, tamM, id);
-
-    if(indice == -1)//-1 es imposible que exista, por lo que nos va a dar error, que no existe
-    {
-        printf("NO HAY NINGUNA MASCOTA REGISTRADO CON EL ID %d\n", id);
-    }
-    else
-    {
-        mostrarMascota(mascotas[indice], tipos, tamT, colores, tamC);//le mostramos el empleado que elegio
-        printf("Confirma baja?: ");
-        fflush(stdin);
-        scanf("%c", &confirma);
-        if(confirma == 's')
-        {
-            mascotas[indice].isEmpty = 1;
-            todoOk = 1;
-        }
-        else
-        {
-            printf("Baja cancelada por el usuario\n");
-        }
-    }
-    return todoOk;
-}

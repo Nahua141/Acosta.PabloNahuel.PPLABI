@@ -7,11 +7,17 @@
 #include "Servicio.h"
 #include "Trabajo.h"
 #include "DataWarehouse.h"
+#include "Informes.h"
 #define TAMM 10
 #define TAMT 5
 #define TAMC 5
 #define TAMS 3
 #define TAMTRA 10
+/** \brief muestra el menu de opciones
+ *
+ * \return int retorna la opcion ingresada por el usuario
+ *
+ */
 int menuOpciones();
 int main()
 {
@@ -25,7 +31,8 @@ int main()
     eTrabajo trabajos[TAMTRA];
     inicializarMascotas(mascotas, TAMM);
     inicializarTrabajos(trabajos, TAMTRA);
-    hardCodearMascotas(mascotas, TAMM, 10, &id);
+    hardCodearMascotas(mascotas, TAMM, 5, &id);
+    hardCodearTrabajos(trabajos, TAMTRA, 5, &idTrabajos);
     do
     {
         switch(menuOpciones())
@@ -42,7 +49,7 @@ int main()
             break;
         case 3:
             system("cls");
-            bajaMascota(mascotas, TAMM, tipos, TAMT, colores, TAMC);
+            bajaMascota(mascotas, TAMM, tipos, TAMT, colores, TAMC, trabajos, TAMTRA);
             system("pause");
             break;
         case 4:
@@ -76,6 +83,26 @@ int main()
             system("pause");
             break;
         case 10:
+            system("cls");
+            trabajosAMascotas(mascotas, TAMM, trabajos, TAMTRA, tipos, TAMT, colores, TAMC, servicios, TAMS);
+            system("pause");
+            break;
+        case 11:
+            system("cls");
+            totalTrabajoMascotas(mascotas, TAMM, trabajos, TAMTRA, tipos, TAMT, colores, TAMC, servicios, TAMS);
+            system("pause");
+            break;
+        case 12:
+            system("cls");
+            servicioRealizadoMascota(mascotas, TAMM, trabajos, TAMTRA, tipos, TAMT, colores, TAMC, servicios, TAMS);
+            system("pause");
+            break;
+        case 13:
+            system("cls");
+            serviciosRealizadosFecha(mascotas, TAMM, trabajos, TAMTRA, tipos, TAMT, colores, TAMC, servicios, TAMS);
+            system("pause");
+            break;
+        case 14:
             printf("Confirma salida?: ");
             fflush(stdin);
             salir = getchar();
@@ -101,7 +128,11 @@ int menuOpciones()
     printf("7-Listar Colores\n");
     printf("8-Alta Trabajos\n");
     printf("9-Mostrar Trabajos \n");
-    printf("10-Salir\n");
+    printf("10-Mostrar Trabajos a mascotas\n");
+    printf("11-Mostrar Total Trabajos a mascotas\n");
+    printf("12-Servicios realizados a mascotas\n");
+    printf("13-Servicios realizados por fecha\n");
+    printf("14-Salir\n");
     printf("Ingrese opcion: ");
     scanf("%d", &opcion);
     return opcion;

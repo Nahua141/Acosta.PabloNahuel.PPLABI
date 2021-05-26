@@ -113,3 +113,40 @@ int altaTrabajo(eMascota mascotas[], int tamM, eTrabajo trabajos[], int tamTR ,e
 
     return todoOk;
 }
+int bajaMascota(eMascota mascotas[], int tamM, eTipo tipos[], int tamT, eColor colores[], int tamC, eTrabajo trabajos[], int tamTRA)
+{
+    int todoOk = 0;
+    int id;
+    int indice;
+    char confirma;
+    system("cls");
+    printf("Baja de mascota\n");
+    mostrarMascotas(mascotas, tamM, tipos, tamT, colores, tamC);
+    printf("Ingrese id: ");
+    scanf("%d", &id);
+
+    indice = buscarMascota(mascotas, tamM, id);
+
+    if(indice == -1)//-1 es imposible que exista, por lo que nos va a dar error, que no existe
+    {
+        printf("NO HAY NINGUNA MASCOTA REGISTRADO CON EL ID %d\n", id);
+    }
+    else
+    {
+        mostrarMascota(mascotas[indice], tipos, tamT, colores, tamC);//le mostramos el empleado que elegio
+        printf("Confirma baja?: ");
+        fflush(stdin);
+        scanf("%c", &confirma);
+        if(confirma == 's')
+        {
+            mascotas[indice].isEmpty = 1;
+            trabajos[indice].isEmpty = 1;
+            todoOk = 1;
+        }
+        else
+        {
+            printf("Baja cancelada por el usuario\n");
+        }
+    }
+    return todoOk;
+}

@@ -39,6 +39,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="DataWarehouse.h" />
+		<Unit filename="Informes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Informes.h" />
 		<Unit filename="Mascota.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -55,6 +59,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Trabajo.h" />
+		<Unit filename="fecha.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="fecha.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
